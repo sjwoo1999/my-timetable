@@ -3,13 +3,14 @@
 /* 전체 컨테이너: 그라디언트 배경과 중앙 정렬 */
 .indexContainer {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto auto; /* 저작권 섹션 추가 */
   min-height: 100vh;
   background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 70%);
   padding: 2rem;
   justify-content: center;
   align-items: center;
   position: relative;
+  gap: 0; /* 행 간격 제거 */
 }
 
 /* 카드: 로그인 폼을 감싸는 컨테이너 */
@@ -25,7 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-bottom: 1rem; /* .footer와의 간격 조정 */
+  margin-bottom: 1rem; /* .footer와의 간격 */
 }
 
 /* 페이드 인 애니메이션 */
@@ -163,11 +164,13 @@
   margin-right: 0.5rem;
 }
 
-/* 푸터 스타일: 상단 모서리 포함 */
+/* 푸터 스타일: 상단 모서리 포함, 하단 직각 */
 .footer {
   grid-row-start: 3;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 1.2rem 2rem;
   background: linear-gradient(90deg, #2d3748, #4a5568);
   color: #e2e8f0;
@@ -175,8 +178,9 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  border-radius: 1rem; /* 상단과 하단 모두 둥글게 */
-  margin-top: -1rem; /* .card와의 간격 조정 */
+  border-radius: 1rem 1rem 0 0; /* 상단만 둥글게, 하단 직각 */
+  margin-top: -1rem;
+  gap: 0.5rem;
 }
 
 /* 푸터 링크 */
@@ -213,6 +217,31 @@
   color: #3b82f6;
 }
 
+/* 저작권 섹션 */
+.copyrightSection {
+  grid-row-start: 4; /* 하단에 위치 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0; /* padding-bottom 감소로 여백 축소 */
+  background: #000000; /* 검정 배경 */
+  color: #ffffff; /* 흰색 텍스트 */
+  width: 100%;
+  font-size: 0.8rem;
+  transition: color 0.3s ease;
+  border-radius: 0; /* 모든 모서리 직각 */
+}
+
+.copyrightSection:hover {
+  color: #ffffff; /* 호버 시 색상 유지 */
+}
+
+.copyright {
+  margin: 0;
+  padding: 0;
+  color: #ffffff; /* 흰색 텍스트 */
+}
+
 /* 반응형 디자인 */
 @media (max-width: 600px) {
   .indexContainer {
@@ -245,13 +274,19 @@
   .footer {
     padding: 1rem;
     flex-direction: column;
-    gap: 0.5rem;
-    border-radius: 0.75rem; /* 모바일에서 조정 */
+    gap: 0.3rem;
+    border-radius: 0.75rem 0.75rem 0 0; /* 모바일에서도 하단 직각 */
   }
 
   .footerLink {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
+  }
+
+  .copyrightSection {
+    padding: 0.2rem 0; /* 모바일에서도 여백 최소화 */
+    font-size: 0.7rem;
+    border-radius: 0; /* 모바일에서도 직각 */
   }
 }
 
@@ -330,5 +365,18 @@
 
   .footerLink:hover::before {
     color: #60a5fa;
+  }
+
+  .copyrightSection {
+    background: #000000; /* 다크 모드에서도 #000000 유지 */
+    color: #ffffff; /* 다크 모드에서도 #ffffff 유지 */
+  }
+
+  .copyrightSection:hover {
+    color: #ffffff; /* 호버 시 색상 유지 */
+  }
+
+  .copyright {
+    color: #ffffff; /* 명시적 지정 */
   }
 }

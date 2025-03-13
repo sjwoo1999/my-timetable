@@ -114,6 +114,9 @@ export default function Login() {
           더 알아보기
         </a>
       </footer>
+      <div className={styles.copyrightSection}>
+        <p className={styles.copyright}>© 2025 woo_s.j</p>
+      </div>
     </div>
   );
 }
