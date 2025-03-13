@@ -1,5 +1,5 @@
 /* styles/globals.css */
-/* Define global CSS variables for a clean and consistent design */
+/* Define global CSS variables for a clean, modern, and accessible design */
 :root {
   --primary-color: #4b5563; /* Slate gray for headers */
   --secondary-color: #f3a8b8; /* Soft pink accent */
@@ -7,7 +7,7 @@
   --background-dark: #1e293b; /* Dark mode background */
   --text-primary: #1f2937; /* Dark text for readability */
   --text-secondary: #6b7280; /* Gray for secondary text */
-  --accent-green: #34d399; /* Fresh green accent */
+  --accent-green: #10b981; /* Fresh green accent */
   --accent-blue: #3b82f6; /* Vibrant blue accent */
   --border-radius: 0.5rem; /* Moderate rounded corners */
   --spacing-unit: 1rem; /* Base spacing unit */
@@ -38,4 +38,12 @@ a {
 
 a:hover {
   color: var(--accent-blue);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-light: var(--background-dark);
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+  }
 }

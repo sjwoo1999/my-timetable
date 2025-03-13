@@ -39,6 +39,7 @@ export default function MainPage() {
         key={timeStr}
         className={styles.timeSlot}
         style={{ gridColumn: 1, gridRow: row }}
+        aria-label={`Time: ${timeStr}`}
       >
         {timeStr}
       </div>
@@ -65,6 +66,8 @@ export default function MainPage() {
           className={`${styles.scheduleBlock} ${styles[subject.color]}`}
           style={{ gridColumn: col, gridRow: `${startRow} / ${endRow}` }}
           title={`${subject.subject} - ${subject.professor} - ${subject.location}`}
+          tabIndex={0}
+          aria-label={`${subject.subject} from ${time.startTime} to ${time.endTime}`}
         >
           <div className={styles.scheduleBlockTitle}>{subject.subject}</div>
           <div className={styles.scheduleBlockDetails}>{subject.professor}</div>
@@ -78,7 +81,7 @@ export default function MainPage() {
   return (
     <div className={styles.timetableContainer}>
       <h2 className={styles.timetableTitle}>2025년 1학기 시간표</h2>
-      <div className={styles.timetable}>
+      <div className={styles.timetable} role="grid" aria-label="Weekly Timetable">
         <div className={styles.header} style={{ gridColumn: 1, gridRow: 1 }}>
           시간
         </div>
@@ -87,6 +90,7 @@ export default function MainPage() {
             key={day}
             className={styles.header}
             style={{ gridColumn: index + 2, gridRow: 1 }}
+            role="columnheader"
           >
             {day}
           </div>
