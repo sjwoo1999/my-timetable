@@ -1,7 +1,8 @@
 // src/pages/index.tsx
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { signInWithEmailAndPassword, FirebaseError } from 'firebase/auth'; // FirebaseError 임포트
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app'; // FirebaseError 참조
 import { auth } from '../firebaseConfig';
 import styles from '../styles/index.module.css';
 
@@ -45,9 +46,14 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, sanitizedEmail, sanitizedPassword);
       router.push('/main-page');
-    } catch (err: FirebaseError) { // FirebaseError 타입 지정
-      const errorMessage = getUserFriendlyError(err.code || err.message);
-      setError(errorMessage);
+    } catch (err) {
+      // unknown 타입 처리, FirebaseError로 단언
+      if (err instanceof FirebaseError) {
+        const errorMessage = getUserFriendlyError(err.code || err.message);
+        setError(errorMessage);
+      } else {
+        setError('알 수 없는 오류가 발생했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 

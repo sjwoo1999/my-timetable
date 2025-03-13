@@ -13,15 +13,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm' # npm 캐시 활성화
-          cache-dependency-path: 'package-lock.json' # 의존성 파일 지정
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
       - name: Cache Next.js build
         uses: actions/cache@v3
         with:
-          path: ~/.next/cache # Next.js 캐시 경로
+          path: ${{ github.workspace }}/.next/cache # 워크스페이스 경로로 조정
           key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-build-
+            ${{ runner.os }}-nextjs- # 더 넓은 복원 범위
       - run: npm ci && npm run build
         env:
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
