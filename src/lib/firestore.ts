@@ -1,5 +1,5 @@
-// lib/firestore.ts
-import { collection, addDoc, query, where, getDocs, DocumentData } from 'firebase/firestore';
+// src/lib/firestore.ts
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { db, auth } from '../firebaseConfig';
 
 interface Post {

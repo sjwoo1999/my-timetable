@@ -1,7 +1,7 @@
 // src/pages/index.tsx
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, FirebaseError } from 'firebase/auth'; // FirebaseError 임포트
 import { auth } from '../firebaseConfig';
 import styles from '../styles/index.module.css';
 
@@ -20,7 +20,7 @@ const validateInput = (email: string, password: string): string | null => {
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (!emailRegex.test(email)) return '유효한 이메일 형식이 아닙니다.';
   if (password.length < 6) return '비밀번호는 최소 6자 이상이어야 합니다.';
-  if (/[<>&'"]/.test(email) || /[<>&'"]/.test(password)) return '올바른 형식으로 입력해 주세요.'; // 메시지 개선
+  if (/[<>&'"]/.test(email) || /[<>&'"]/.test(password)) return '올바른 형식으로 입력해 주세요.';
   return null;
 };
 
@@ -45,7 +45,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, sanitizedEmail, sanitizedPassword);
       router.push('/main-page');
-    } catch (err: any) {
+    } catch (err: FirebaseError) { // FirebaseError 타입 지정
       const errorMessage = getUserFriendlyError(err.code || err.message);
       setError(errorMessage);
     }
