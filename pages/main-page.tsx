@@ -1,6 +1,7 @@
 // pages/main-page.tsx
 import React from 'react';
 import { timetable } from '../lib/timetableData';
+import Link from 'next/link';
 import styles from '../styles/main-page.module.css';
 
 const DAYS = ['월', '화', '수', '목', '금'] as const;
@@ -61,19 +62,25 @@ export default function MainPage() {
         return null;
       }
       return (
-        <div
+        <Link
           key={`${subject.id}-${time.day}`}
-          className={`${styles.scheduleBlock} ${styles[subject.color]}`}
-          style={{ gridColumn: col, gridRow: `${startRow} / ${endRow}` }}
-          title={`${subject.subject} - ${subject.professor} - ${subject.location}`}
-          tabIndex={0}
-          aria-label={`${subject.subject} from ${time.startTime} to ${time.endTime}`}
+          href={`/subjects/${subject.id}`}
+          passHref
+          legacyBehavior
         >
-          <div className={styles.scheduleBlockTitle}>{subject.subject}</div>
-          <div className={styles.scheduleBlockDetails}>{subject.professor}</div>
-          <div className={styles.scheduleBlockDetails}>{subject.location}</div>
-          <div className={styles.scheduleBlockTime}>{`${time.startTime} ~ ${time.endTime}`}</div>
-        </div>
+          <div
+            className={`${styles.scheduleBlock} ${styles[subject.color]}`}
+            style={{ gridColumn: col, gridRow: `${startRow} / ${endRow}` }}
+            title={`${subject.subject} - ${subject.professor} - ${subject.location}`}
+            tabIndex={0}
+            aria-label={`${subject.subject} from ${time.startTime} to ${time.endTime}`}
+          >
+            <div className={styles.scheduleBlockTitle}>{subject.subject}</div>
+            <div className={styles.scheduleBlockDetails}>{subject.professor}</div>
+            <div className={styles.scheduleBlockDetails}>{subject.location}</div>
+            <div className={styles.scheduleBlockTime}>{`${time.startTime} ~ ${time.endTime}`}</div>
+          </div>
+        </Link>
       );
     })
   ).filter(Boolean);
