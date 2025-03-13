@@ -1,15 +1,16 @@
+// src/components/ProtectedRoute.tsx
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push('/login');
+      if (!user && router.pathname !== '/') {
+        router.push('/');
       }
     });
     return () => unsubscribe();

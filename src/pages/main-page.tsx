@@ -1,8 +1,9 @@
-// pages/main-page.tsx
+// src/pages/main-page.tsx
 import React from 'react';
 import { timetable } from '../lib/timetableData';
 import Link from 'next/link';
 import styles from '../styles/main-page.module.css';
+import LogoutButton from '../components/LogoutButton';
 
 const DAYS = ['월', '화', '수', '목', '금'] as const;
 const START_HOUR = 9;
@@ -104,6 +105,9 @@ export default function MainPage() {
         ))}
         {timeLabels}
         {scheduleBlocks}
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+        <LogoutButton />
       </div>
     </div>
   );

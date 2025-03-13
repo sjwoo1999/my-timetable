@@ -1,7 +1,16 @@
-import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+// lib/firestore.ts
+import { collection, addDoc, query, where, getDocs, DocumentData } from 'firebase/firestore';
 import { db, auth } from '../firebaseConfig';
 
-export async function createPost(title, content) {
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  userId: string;
+  createdAt: string;
+}
+
+export async function createPost(title: string, content: string): Promise<void> {
   const user = auth.currentUser;
   if (user) {
     await addDoc(collection(db, 'posts'), {
@@ -15,12 +24,15 @@ export async function createPost(title, content) {
   }
 }
 
-export async function getPosts() {
+export async function getPosts(): Promise<Post[]> {
   const user = auth.currentUser;
   if (user) {
     const q = query(collection(db, 'posts'), where('userId', '==', user.uid));
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Post[];
   }
   return [];
 }
