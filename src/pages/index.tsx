@@ -1,9 +1,9 @@
 // src/pages/index.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { FirebaseError } from 'firebase/app'; // FirebaseError 참조
-import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword, Auth } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
+import { getAuthInstance } from '../firebaseConfig'; // getAuthInstance로 수정
 import styles from '../styles/index.module.css';
 
 // HTML 이스케이프 함수 (XSS 방지)
@@ -29,9 +29,25 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [auth, setAuth] = useState<Auth | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    try {
+      const authInstance = getAuthInstance();
+      setAuth(authInstance);
+    } catch (err) {
+      console.error('Firebase Auth 초기화 실패:', err);
+      setError('인증 초기화에 실패했습니다. 다시 시도해 주세요.');
+    }
+  }, []);
+
   const handleLogin = async () => {
+    if (!auth) {
+      setError('인증 초기화 중입니다. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
+
     // 입력 검증
     const validationError = validateInput(email, password);
     if (validationError) {
@@ -47,7 +63,6 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, sanitizedEmail, sanitizedPassword);
       router.push('/main-page');
     } catch (err) {
-      // unknown 타입 처리, FirebaseError로 단언
       if (err instanceof FirebaseError) {
         const errorMessage = getUserFriendlyError(err.code || err.message);
         setError(errorMessage);
@@ -101,10 +116,7 @@ export default function Login() {
           />
         </div>
         <div className={styles.callToActions}>
-          <button
-            onClick={handleLogin}
-            className={styles.primaryButton}
-          >
+          <button onClick={handleLogin} className={styles.primaryButton}>
             로그인
           </button>
         </div>

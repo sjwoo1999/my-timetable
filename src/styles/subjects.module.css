@@ -1,107 +1,428 @@
 /* styles/subjects.module.css */
-/* Container for the subject detail page */
+
+/* 전체 컨테이너 */
 .timetableContainer {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    min-height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 70%);
+}
+
+/* 콘텐츠 래퍼 */
+.contentWrapper {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 타이틀 */
+.timetableTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  position: relative;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timetableTitle::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #3b82f6;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.timetableTitle:hover::after {
+  width: 80px;
+}
+
+/* 세부 정보 블록 */
+.detailsBlock {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.detailItem {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* 오류 메시지 */
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fee2e2;
+  color: #ef4444;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.errorIcon {
+  font-size: 1rem;
+}
+
+/* 돌아가기 버튼 */
+.backButton {
+  padding: 0.75rem 1.5rem;
+  background: #6b7280;
+  color: white;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background: #4b5563;
+  transform: scale(1.05);
+}
+
+/* 게시판 섹션 */
+.boardSection {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.boardTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.writeButton {
+  padding: 0.5rem 1rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.writeButton:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+.postList {
+  margin-top: 1rem;
+}
+
+.noPosts {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.postItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.postContent {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.postContent h4 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.postContent p {
+  color: #6b7280;
+  margin: 0 0 0.5rem 0;
+}
+
+.postContent span {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.editButton {
+  padding: 0.25rem 0.75rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editButton:hover {
+  background: #059669;
+  transform: scale(1.05);
+}
+
+.saveButton {
+  padding: 0.25rem 0.75rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.saveButton:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+.deleteButton {
+  padding: 0.25rem 0.75rem;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deleteButton:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* 작성 페이지 스타일 */
+.writeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.textareaField {
+  padding: 0.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.3s ease;
+}
+
+.textareaField:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.submitButton {
+  padding: 0.5rem 1rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+  .timetableContainer {
+    padding: 1rem;
   }
-  
-  /* Content wrapper for vertical alignment */
+
   .contentWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 1.5rem;
-  }
-  
-  /* Title styling for the subject */
-  .timetableTitle {
-    text-align: center;
-    margin-bottom: 1rem;
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #1f2937;
-    letter-spacing: 0.05em;
-  }
-  
-  /* Details block styling */
-  .detailsBlock {
-    background-color: #f9fafb;
     padding: 1.5rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 600px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
-  
+
+  .timetableTitle {
+    font-size: 2rem;
+  }
+
   .detailItem {
     font-size: 1rem;
-    font-weight: 500;
-    color: #1f2937;
-    margin-bottom: 0.75rem;
-    line-height: 1.5;
   }
-  
-  .detailItem:last-child {
-    margin-bottom: 0;
+
+  .boardTitle {
+    font-size: 1.5rem;
   }
-  
-  /* Back button styling */
+
+  .postItem {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .writeForm {
+    gap: 0.5rem;
+  }
+
+  .inputField,
+  .textareaField {
+    width: 100%;
+  }
+
+  .writeButton,
+  .submitButton {
+    width: 100%;
+  }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .timetableContainer {
+    background: linear-gradient(135deg, #1e293b 0%, #374151 70%);
+  }
+
+  .contentWrapper {
+    background: #374151;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .timetableTitle {
+    color: #e2e8f0;
+  }
+
+  .detailItem {
+    color: #94a3b8;
+  }
+
+  .errorMessage {
+    background: #4b5563;
+    color: #f87171;
+  }
+
   .backButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    background-color: #4b5563;
-    color: white;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.2s, transform 0.2s;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
+    background: #4b5563;
   }
-  
+
   .backButton:hover {
-    background-color: #6b7280;
-    transform: translateY(-0.125rem);
+    background: #374151;
   }
-  
-  .backButton:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
+
+  .writeButton {
+    background: #3b82f6;
   }
-  
-  /* Responsive design adjustments */
-  @media (max-width: 768px) {
-    .timetableContainer {
-      padding: 1rem;
-    }
-  
-    .timetableTitle {
-      font-size: 1.75rem;
-    }
-  
-    .detailsBlock {
-      padding: 1rem;
-    }
-  
-    .detailItem {
-      font-size: 0.9rem;
-    }
-  
-    .backButton {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
+
+  .writeButton:hover {
+    background: #2563eb;
   }
+
+  .postItem {
+    background: #2d3748;
+  }
+
+  .postContent h4 {
+    color: #e2e8f0;
+  }
+
+  .postContent p {
+    color: #94a3b8;
+  }
+
+  .postContent span {
+    color: #9ca3af;
+  }
+
+  .noPosts {
+    color: #94a3b8;
+  }
+
+  .inputField,
+  .textareaField {
+    border-color: #4b5563;
+    background: #4b5563;
+    color: #e2e8f0;
+  }
+
+  .inputField:focus,
+  .textareaField:focus {
+    border-color: #60a5fa;
+  }
+
+  .submitButton {
+    background: #3b82f6;
+  }
+
+  .submitButton:hover {
+    background: #2563eb;
+  }
+
+  .editButton {
+    background: #10b981;
+  }
+
+  .editButton:hover {
+    background: #059669;
+  }
+
+  .saveButton {
+    background: #3b82f6;
+  }
+
+  .saveButton:hover {
+    background: #2563eb;
+  }
+
+  .deleteButton {
+    background: #ef4444;
+  }
+
+  .deleteButton:hover {
+    background: #dc2626;
+  }
+}
+
+/**/
+
+/* styles/subjects.module.css */
+
+/* 기존 스타일 유지 */
+
+/* 로그아웃 버튼 */
+.logout-button {
+  padding: 0.75rem 1.5rem;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background: #4b5563;
+  transform: scale(1.05);
+}
+
+/* 다크 모드 지원에서 추가 */
+@media (prefers-color-scheme: dark) {
+  .logout-button {
+    background: #4b5563;
+  }
+
+  .logout-button:hover {
+    background: #374151;
+  }
+}

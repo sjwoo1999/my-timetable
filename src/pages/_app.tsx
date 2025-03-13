@@ -1,23 +1,35 @@
-// pages/_app.tsx
-import '../styles/globals.css';
-import '../styles/index.module.css'; // 경로 확인
-import type { AppProps } from 'next/app';
+// src/pages/_app.tsx
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
+import { onAuthStateChanged, Auth } from 'firebase/auth';
+import { AppProps } from 'next/app'; // Next.js AppProps 타입 임포트
+import { getAuthInstance } from '../firebaseConfig';
+import '../styles/globals.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const [auth, setAuth] = useState<Auth | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    try {
+      const authInstance = getAuthInstance();
+      setAuth(authInstance);
+    } catch (err) {
+      console.error('Firebase Auth 초기화 실패:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!auth) return;
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user && router.pathname !== '/') {
         router.push('/');
       }
     });
+
     return () => unsubscribe();
-  }, [router]);
+  }, [auth, router]);
 
   return <Component {...pageProps} />;
 }
