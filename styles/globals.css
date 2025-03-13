@@ -1,15 +1,16 @@
 /* styles/globals.css */
+/* Define global CSS variables for a clean and consistent design */
 :root {
-  --primary-color: #6b48ff; /* 트렌디한 보라색 */
-  --secondary-color: #ff6b6b; /* 부드러운 코럴 */
-  --background-light: #f9fafb; /* 밝은 배경 */
-  --background-dark: #1e293b; /* 다크 모드 배경 */
-  --text-primary: #0f172a; /* 주요 텍스트 */
-  --text-secondary: #64748b; /* 보조 텍스트 */
-  --accent-green: #4CAF50; /* 녹색 액센트 */
-  --accent-blue: #2196F3; /* 파란색 액센트 */
-  --border-radius: 12px; /* 둥근 모서리 */
-  --spacing-unit: 1rem; /* 기본 간격 단위 */
+  --primary-color: #4b5563; /* Slate gray for headers */
+  --secondary-color: #f3a8b8; /* Soft pink accent */
+  --background-light: #f9fafb; /* Light background */
+  --background-dark: #1e293b; /* Dark mode background */
+  --text-primary: #1f2937; /* Dark text for readability */
+  --text-secondary: #6b7280; /* Gray for secondary text */
+  --accent-green: #34d399; /* Fresh green accent */
+  --accent-blue: #3b82f6; /* Vibrant blue accent */
+  --border-radius: 0.5rem; /* Moderate rounded corners */
+  --spacing-unit: 1rem; /* Base spacing unit */
 }
 
 html, body {
@@ -30,6 +31,11 @@ html, body {
 }
 
 a {
-  color: inherit;
+  color: var(--text-primary);
   text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--accent-blue);
 }

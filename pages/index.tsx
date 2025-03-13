@@ -1,41 +1,24 @@
 // pages/index.tsx
 import Link from 'next/link';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        padding: '2rem',
-        textAlign: 'center',
-      }}
-    >
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-        시간표 애플리케이션
-      </h1>
-      <p style={{ fontSize: '1.25rem', marginBottom: '2rem' }}>
-        주간 일정을 확인하고 관리하세요.
-      </p>
-      <Link
-        href="/main-page"
-        style={{
-          fontSize: '1.125rem',
-          color: '#1e40af',
-          padding: '0.75rem 1.5rem',
-          border: '1px solid #1e40af',
-          borderRadius: '4px',
-          transition: 'background-color 0.2s ease',
-          textDecoration: 'none',
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#e6f0ff')}
-        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-      >
-        시간표 보기
-      </Link>
+    <div className={styles.homeContainer}>
+      <div className={styles.mainContent}>
+        <h1>시간표 애플리케이션</h1>
+        <p>주간 일정을 확인하고 관리하세요.</p>
+        <div className={styles.callToActions}>
+          <Link href="/main-page" className={styles.primaryLink}>
+            시간표 보기
+          </Link>
+        </div>
+      </div>
+      <footer className={styles.footer}>
+        <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+          더 알아보기
+        </a>
+      </footer>
     </div>
   );
 }

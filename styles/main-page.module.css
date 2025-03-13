@@ -1,0 +1,128 @@
+/* styles/main-page.module.css */
+/* Container for the timetable page */
+.timetableContainer {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Title styling for the timetable */
+.timetableTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+/* Grid layout for the timetable */
+.timetable {
+  display: grid;
+  grid-template-columns: 100px repeat(5, 1fr);
+  grid-template-rows: 60px repeat(48, 40px);
+  gap: 0.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+/* Header styling for days and time labels */
+.header {
+  background-color: #4b5563;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Time slot cells */
+.timeSlot {
+  background-color: #f3f4f6;
+  border-right: 1px solid #d1d5db;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.timeSlot:hover {
+  background-color: #e5e7eb;
+}
+
+/* Schedule block styling for subjects */
+.scheduleBlock {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.scheduleBlock:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scheduleBlockTitle {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.scheduleBlockDetails {
+  font-size: 0.85rem;
+  color: #1f2937;
+  line-height: 1.2;
+}
+
+.scheduleBlockTime {
+  font-size: 0.8rem;
+  color: #1f2937;
+  text-align: right;
+}
+
+/* Color classes for different subjects */
+.green { background-color: #34d399; color: #1f2937; }
+.blue { background-color: #3b82f6; color: white; }
+.yellow { background-color: #facc15; color: #1f2937; }
+.orange { background-color: #fb923c; color: white; }
+.pink { background-color: #f472b6; color: white; }
+.purple { background-color: #a78bfa; color: white; }
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .timetable {
+    grid-template-columns: 80px repeat(5, 1fr);
+    grid-template-rows: 50px repeat(48, 35px);
+  }
+  .scheduleBlock {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timetable {
+    grid-template-columns: 60px repeat(2, 1fr);
+    grid-template-rows: 50px repeat(96, 20px);
+  }
+  .header {
+    font-size: 0.9rem;
+  }
+}
