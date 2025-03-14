@@ -3,19 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2025년 1학기 시간표 관리 애플리케이션</title>
-  <style>
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-    h1 { color: #1f2937; font-size: 2.5rem; }
-    h2 { color: #4b5563; font-size: 1.8rem; margin-top: 2rem; }
-    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
-    th, td { border: 1px solid #e5e7eb; padding: 0.8rem; text-align: left; }
-    th { background-color: #f3f4f6; }
-    pre { background: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
-    code { font-family: 'Courier New', monospace; }
-    a { color: #3b82f6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  </style>
 </head>
 <body>
   <h1>2025년 1학기 시간표 관리 애플리케이션</h1>
